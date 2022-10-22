@@ -1,11 +1,53 @@
 console.log("%c script link test", "color: orange; font-size: 25px;");
 
+var city = $("#cityElement");
+var state = $("#stateElement");
+var searchBtn = $("#searchBtn");
+
 fetch(
 	"https://api.openweathermap.org/data/2.5/forecast?lat=30.267153&lon=-97.743057&units=imperial&appid=7ed9c252ddbaeac32afbe6925e2cfcd7"
 )
 	.then((response) => response.json())
 	.then((data) => console.log(data));
 
+function getForecast() {
+	var geoCodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city.value}&limit=1&appid=7ed9c252ddbaeac32afbe6925e2cfcd7`;
+
+	getLatLong(geoCodeUrl)
+		.then((latlon) => getWeather(latlon[0], latlon[1]))
+		.then(function (weatherData) {
+			setupCurrentDayElement(weatherData.list[0]);
+			var days = [
+				weatherData.list[8],
+				weatherData.list[16],
+				weatherData.list[24],
+				weatherData.list[32],
+			];
+			days.forEach((day) => setupFutureDayElement(day));
+		});
+}
+
+function getWeather(lat, lon) {
+	var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=7ed9c252ddbaeac32afbe6925e2cfcd7`;
+
+	return fetch(weatherUrl).then((response) => response.json());
+}
+
+function getLatLong(url) {
+	return fetch(url)
+		.then((response) => response.json())
+		.then((data) => [data[0].lat, data[0].lon]);
+}
+
+function currentDayWeather() {}
+
+// fetch(
+// 	`http://api.openweathermap.org/geo/1.0/direct?q=austin&limit=1&appid=7ed9c252ddbaeac32afbe6925e2cfcd7`
+// )
+// 	.then((response) => response.json())
+// 	.then((data) => console.log(data));
+
+// var getLatLongUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityElement},${stateElement}&limit=1&appid=7ed9c252ddbaeac32afbe6925e2cfcd7`;
 //Use city name and state code from input to construct url for geocoding api call. Event listener for search button and enter keypress to run main function
 
 //Construct a url for the geocoding api, transform city name into lat/long.
@@ -29,8 +71,6 @@ fetch(
 //generate a button element with the city/state name...put city name and state code in data attributes
 
 //For button, even listenter to run main function, pass values in data attributes for the city name and state code into it.
-
-// var getLatLongUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityElement},${stateElement}&limit=1&appid=7ed9c252ddbaeac32afbe6925e2cfcd7`;
 
 // function getLatLongInfo() {
 // 	fetch(getLatLong)
