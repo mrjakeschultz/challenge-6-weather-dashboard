@@ -6,7 +6,48 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Jake's Weather Dashboard</title>
 		<link rel="stylesheet" href="./assets\css\styles.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+		/>
+		<script
+			src="https://code.jquery.com/jquery-3.6.1.min.js"
+			integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+			crossorigin="anonymous"
+		></script>
 	</head>
-	<body></body>
+	<body>
+		<div id="banner" class="topBanner"></div>
+		<section id="mainBigBox" class="container-lg">
+			<div class="row justify-content-center">
+				<div id="leftStuff" class="primaryBox col-4">
+					left stuff and search bar
+					<div class="input-group">
+						<span class="input-group-text">City and State</span>
+						<input
+							id="cityElement"
+							placeholder="City"
+							type="text"
+							aria-label="City name"
+							class="form-control"
+						/>
+						<input
+							id="stateElement"
+							placeholder="two-letter state code"
+							type="text"
+							aria-label="State code"
+							class="form-control"
+						/>
+						<button id="searchBtn" class="btn btn-primary" type="submit">
+							search
+						</button>
+					</div>
+				</div>
+				<div id="rightStuff" class="primaryBox col-8">
+					current day forecast and future forecast days
+				</div>
+			</div>
+		</section>
+	</body>
 	<script src="./assets\js\scripts.js"></script>
 </html>
