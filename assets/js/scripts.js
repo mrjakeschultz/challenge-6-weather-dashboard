@@ -3,6 +3,7 @@ console.log("%c script link test", "color: orange; font-size: 25px;");
 var city = $("#cityElement");
 var state = $("#stateElement");
 var searchBtn = $("#searchBtn");
+var rightStuff = $("#rightStuff");
 
 fetch(
 	"https://api.openweathermap.org/data/2.5/forecast?lat=30.267153&lon=-97.743057&units=imperial&appid=7ed9c252ddbaeac32afbe6925e2cfcd7"
@@ -39,7 +40,13 @@ function getLatLong(url) {
 		.then((data) => [data[0].lat, data[0].lon]);
 }
 
-function currentDayWeather() {}
+function setupCurrentDayElement(x) {
+	var currentDayDiv = document.createElement("div");
+	$(currentDayDiv).insertAfter($(rightStuff));
+	currentDayDiv.textContent = x.main.temp;
+}
+
+function setupFutureDAyElement() {}
 
 // fetch(
 // 	`http://api.openweathermap.org/geo/1.0/direct?q=austin&limit=1&appid=7ed9c252ddbaeac32afbe6925e2cfcd7`
