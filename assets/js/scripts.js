@@ -15,7 +15,7 @@ searchBtn.on("click", getForecast);
 
 function getForecast() {
 	console.log(city.val());
-	var geoCodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city.val()}&limit=1&appid=7ed9c252ddbaeac32afbe6925e2cfcd7`;
+	var geoCodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city.val()}&limit=1&appid=7ed9c252ddbaeac32afbe6925e2cfcd7`;
 
 	getLatLong(geoCodeUrl)
 		.then((latlon) => getWeather(latlon[0], latlon[1]))
@@ -65,7 +65,7 @@ function setupCurrentDayElement(x) {
 	<span>${x.wind.speed}</span>
 	</div>
 	<div>
-	<img src="http://openweathermap.org/img/wn/${x.weather[0].icon}@2x.png"
+	<img src="https://openweathermap.org/img/wn/${x.weather[0].icon}@2x.png"
 	</div>
 	`;
 	$(currentDayStatsDiv).appendTo($(rightStuff));
@@ -88,7 +88,7 @@ function setupFutureDayElement(day, card) {
 	<span>${day.wind.speed}</span>
 	</div>
 	<div>
-	<img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png"
+	<img src="https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png"
 	</div>
 	`;
 }
