@@ -50,7 +50,9 @@ function getLatLong(url) {
 }
 
 function setupCurrentDayElement(x) {
+	$("#currentDayStatsDiv").remove();
 	var currentDayStatsDiv = document.createElement("div");
+	$(currentDayStatsDiv).attr("id", "currentDayStatsDiv");
 	currentDayStatsDiv.innerHTML = `
 	<div>Temp: 
 	<span>${x.main.temp}</span>
