@@ -20,7 +20,7 @@
 		<div id="banner" class="topBanner"></div>
 		<section id="mainBigBox" class="container-lg">
 			<div class="row justify-content-center">
-				<div id="leftStuff" class="primaryBox col-4">
+				<section id="leftStuffContainer" class="primaryBox col-4">
 					left stuff and search bar
 					<div class="input-group">
 						<span class="input-group-text">City and State</span>
@@ -42,8 +42,19 @@
 							search
 						</button>
 					</div>
-				</div>
-				<div id="rightStuff" class="primaryBox col-8"></div>
+				</section>
+				<section
+					id="rightStuffContainer"
+					class="row col-8 justify-content-center"
+				>
+					<div id="rightStuff" class="primaryBox"></div>
+					<div id="cardsContainer">
+						<div class="futureForecastCards"></div>
+						<div class="futureForecastCards"></div>
+						<div class="futureForecastCards"></div>
+						<div class="futureForecastCards"></div>
+					</div>
+				</section>
 			</div>
 		</section>
 	</body>

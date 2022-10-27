@@ -11,8 +11,11 @@ fetch(
 	.then((response) => response.json())
 	.then((data) => console.log(data));
 
+searchBtn.on("click", getForecast);
+
 function getForecast() {
-	var geoCodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city.value}&limit=1&appid=7ed9c252ddbaeac32afbe6925e2cfcd7`;
+	console.log(city.val());
+	var geoCodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city.val()}&limit=1&appid=7ed9c252ddbaeac32afbe6925e2cfcd7`;
 
 	getLatLong(geoCodeUrl)
 		.then((latlon) => getWeather(latlon[0], latlon[1]))
@@ -24,7 +27,13 @@ function getForecast() {
 				weatherData.list[24],
 				weatherData.list[32],
 			];
-			days.forEach((day) => setupFutureDayElement(day));
+
+			futureForecastCards = document.querySelectorAll(".futureForecastCards");
+
+			days.forEach((day, idx) => {
+				var card = futureForecastCards[idx];
+				setupFutureDayElement(day, card);
+			});
 		});
 }
 
@@ -41,12 +50,42 @@ function getLatLong(url) {
 }
 
 function setupCurrentDayElement(x) {
-	var currentDayDiv = document.createElement("div");
-	$(currentDayDiv).insertAfter($(rightStuff));
-	currentDayDiv.textContent = x.main.temp;
+	var currentDayStatsDiv = document.createElement("div");
+	currentDayStatsDiv.innerHTML = `
+	<div>Temp: 
+	<span>${x.main.temp}</span>
+	</div>
+	<div>Humidity: 
+	<span>${x.main.humidity}</span>
+	</div>
+	<div>Wind: 
+	<span>${x.wind.speed}</span>
+	</div>
+	<div>
+	<img src="http://openweathermap.org/img/wn/${x.weather[0].icon}@2x.png"
+	</div>
+	`;
+	$(currentDayStatsDiv).appendTo($(rightStuff));
 }
 
-function setupFutureDAyElement() {}
+function setupFutureDayElement(day, card) {
+	card.innerHTML = `
+	<div>${day.dt_txt}
+	</div>
+	<div>Temp: 
+	<span>${day.main.temp}</span>
+	</div>
+	<div>Humidity: 
+	<span>${day.main.humidity}</span>
+	</div>
+	<div>Wind: 
+	<span>${day.wind.speed}</span>
+	</div>
+	<div>
+	<img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png"
+	</div>
+	`;
+}
 
 // fetch(
 // 	`http://api.openweathermap.org/geo/1.0/direct?q=austin&limit=1&appid=7ed9c252ddbaeac32afbe6925e2cfcd7`
