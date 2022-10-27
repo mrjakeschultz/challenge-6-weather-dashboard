@@ -54,6 +54,7 @@ function setupCurrentDayElement(x) {
 	var currentDayStatsDiv = document.createElement("div");
 	$(currentDayStatsDiv).attr("id", "currentDayStatsDiv");
 	currentDayStatsDiv.innerHTML = `
+	<h4>Current Weather</h4>
 	<div>Temp: 
 	<span>${x.main.temp}</span>
 	</div>
@@ -71,7 +72,10 @@ function setupCurrentDayElement(x) {
 }
 
 function setupFutureDayElement(day, card) {
+	var cardsContainer = $("#cardsContainer");
+	$(cardsContainer).attr("class", "primaryBox");
 	card.innerHTML = `
+	<h4>Extended Forecast</h4>
 	<div>${day.dt_txt}
 	</div>
 	<div>Temp: 
